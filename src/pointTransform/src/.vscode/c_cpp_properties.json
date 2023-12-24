@@ -1,0 +1,27 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/opt/ros/noetic/include/**",
+        "/home/anton20241/pipe_inspect_ws/devel/include/**",
+        "/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/include/**",
+        "/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco_ros/include/**",
+        "/home/anton20241/pipe_inspect_ws/src/get_frame_from_cam/include/**",
+        "/home/anton20241/pipe_inspect_ws/src/marker_detect_module/include/**",
+        "/home/anton20241/m5_ws/src/pointTransform/include/**",
+        "/home/anton20241/pipe_inspect_ws/src/vdrk_move/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

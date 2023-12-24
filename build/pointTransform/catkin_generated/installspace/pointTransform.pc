@@ -1,0 +1,8 @@
+prefix=/home/anton202/m5_ws/install
+
+Name: pointTransform
+Description: Description of pointTransform
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
