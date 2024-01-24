@@ -17,7 +17,7 @@ using namespace std;
 using namespace cv;
 using namespace cv::aruco;
 
-const std::string framesHolder = "experiments_with_ToF/glass_for_microscopes/";
+const std::string framesHolder = "experiments_with_ToF/glass_for_microscopes_new/";
 
 const Size chessboardDimension = Size(10, 7);
 
@@ -161,10 +161,10 @@ void getCam2PointsZCoordinate(std::vector<double> &Cam2PointsZCoordinate,
       r.sleep();
     } while(!getTransform);
     printCamera2ImgSomePointPose(transform);
-    // Cam2PointsZCoordinate.push_back(std::sqrt(pow(transform.getOrigin().x(),2) + 
-    //                                           pow(transform.getOrigin().y(),2) + 
-    //                                           pow(transform.getOrigin().z(),2)));
-    Cam2PointsZCoordinate.push_back(transform.getOrigin().z());
+    Cam2PointsZCoordinate.push_back(std::sqrt(pow(transform.getOrigin().x(),2) + 
+                                              pow(transform.getOrigin().y(),2) + 
+                                              pow(transform.getOrigin().z(),2)));
+    // Cam2PointsZCoordinate.push_back(transform.getOrigin().z());
 
   }
 }
@@ -194,7 +194,7 @@ void getZWorldCoordForAllFrames(  const std::vector<std::vector<double>> &WorldP
                               listener,
                               i);
     assert(Cam2PointsZCoordinate.size() == 54);
-    getFileFromVec(Cam2PointsZCoordinate, framesHolder + "Cam2PointsZ" + std::to_string(i) + ".txt");
+    getFileFromVec(Cam2PointsZCoordinate, framesHolder + "Cam2PointsDist" + std::to_string(i) + ".txt");
   }
 }
 
@@ -257,7 +257,7 @@ void getAllFoundCornersForAllFrames(const std::vector<std::vector<double>> &Tran
 
   for (size_t i = 0; i < TranslationVectors.size(); i++)  // для всех кадров i < TranslationVectors.size() i - конкретный кадр
   {
-    // if (i == 13 || i == 22) continue;
+    if (i == 16) continue;
     cv::Mat img;
     std::string imgAddr  = framesHolder + "m_depthFrame" + std::to_string(i) + ".png";
     img = cv::imread(imgAddr, cv::IMREAD_COLOR);
@@ -315,7 +315,7 @@ void getDeffKoeffVecForOneFrame(const vector<vector<Point2f>> &allFoundCorners,
   vector<double> Cam2PointsZCoordinate;                     // Z для всех кл точек кадра
 
   std::string PopugayVecFileAddr            = framesHolder + "PopugayVec" + std::to_string(i) + ".txt";
-  std::string Cam2PointsZCoordinateFileAddr = framesHolder + "Cam2PointsZ" + std::to_string(i) + ".txt";
+  std::string Cam2PointsZCoordinateFileAddr = framesHolder + "Cam2PointsDist" + std::to_string(i) + ".txt";
 
   getVecFromFile(PopugayVec, PopugayVecFileAddr);
   getVecFromFile(Cam2PointsZCoordinate, Cam2PointsZCoordinateFileAddr);
@@ -339,7 +339,7 @@ void getPopugaysForAllFrames(const vector<vector<Point2f>> &allFoundCorners){
 
   for (size_t i = 0; i < allFoundCorners.size(); i++)       // для всех кадров i < allFoundCorners.size() i - конкретный кадр
   {
-    // if (i == 13 || i == 22) continue;
+    if (i == 16) continue;
     vector<double> PopugayVec;                              // попугаи для всех кл точек кадра
     getPopugayVecForOneFrame(allFoundCorners, PopugayVec, i);
     assert(PopugayVec.size() == 54);
@@ -351,11 +351,11 @@ void getDeffKoeffForAllFrames(const vector<vector<Point2f>> &allFoundCorners){
 
   for (size_t i = 0; i < allFoundCorners.size(); i++)       // для всех кадров i < allFoundCorners.size() i - конкретный кадр
   {
-    // if (i == 13 || i == 22) continue;
+    if (i == 16) continue;
     vector<double> DeffKoeffVec;                            // коэффициенты для всех кл точек кадра
     getDeffKoeffVecForOneFrame(allFoundCorners, DeffKoeffVec, i);
     assert(DeffKoeffVec.size() == 54);
-    getFileFromVec(DeffKoeffVec, framesHolder + "DeffKoeffVecZ" + std::to_string(i) + ".txt");
+    getFileFromVec(DeffKoeffVec, framesHolder + "DeffKoeffVecDist" + std::to_string(i) + ".txt");
   }
 }
 
